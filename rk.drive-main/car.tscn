@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/car_controller.gd" id="1_ctrl"]
+[ext_resource type="PackedScene" path="res://lamborghini_revuelto_lite.glb" id="2_model"]
+[ext_resource type="Script" path="res://scripts/wheel_sync.gd" id="3_wheel"]
+[ext_resource type="Script" path="res://scripts/car_audio.gd" id="4_audio"]
+[ext_resource type="Script" path="res://scripts/car_lights.gd" id="5_lights"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_body"]
+size = Vector3(2.2, 0.85, 4.9)
+
+[node name="Car" type="VehicleBody3D"]
+mass = 1500.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0.3, 0)
+can_sleep = false
+linear_damp = 0.05
+angular_damp = 1.0
+script = ExtResource("1_ctrl")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62, 0.1)
+shape = SubResource("BoxShape3D_body")
+
+[node name="Model" parent="." instance=ExtResource("2_model")]
+
+[node name="WheelFL" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.852, 0.5, 1.393)
+use_as_traction = true
+use_as_steering = true
+wheel_radius = 0.34
+wheel_rest_length = 0.15
+suspension_travel = 0.3
+suspension_stiffness = 60.0
+suspension_max_force = 9000.0
+
+[node name="WheelFR" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.852, 0.5, 1.393)
+use_as_traction = true
+use_as_steering = true
+wheel_radius = 0.34
+wheel_rest_length = 0.15
+suspension_travel = 0.3
+suspension_stiffness = 60.0
+suspension_max_force = 9000.0
+
+[node name="WheelRL" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.852, 0.5, -1.388)
+use_as_traction = true
+wheel_radius = 0.34
+wheel_rest_length = 0.15
+suspension_travel = 0.3
+suspension_stiffness = 60.0
+suspension_max_force = 9000.0
+
+[node name="WheelRR" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.852, 0.5, -1.388)
+use_as_traction = true
+wheel_radius = 0.34
+wheel_rest_length = 0.15
+suspension_travel = 0.3
+suspension_stiffness = 60.0
+suspension_max_force = 9000.0
+
+[node name="WheelSync" type="Node" parent="."]
+script = ExtResource("3_wheel")
+
+[node name="Audio" type="Node" parent="."]
+script = ExtResource("4_audio")
+
+[node name="Lights" type="Node" parent="."]
+script = ExtResource("5_lights")

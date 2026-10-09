@@ -1,0 +1,16 @@
+RK Drive - audio credits
+(Fill in the license of every file from its download page BEFORE publishing.
+ If a license says CC-BY you MUST credit the author in the app/Play Store text.)
+
+assets/audio/engine_idle_loop.ogg    <- 557212__lhermanns__enginewarmup_3-loop.wav   (freesound.org, check license page)
+assets/audio/engine_loop_short.ogg   <- freesound_community-engine-47745.mp3          (pixabay)
+assets/audio/engine_cruise_loop.ogg  <- astonmartinvantagev12-chevrolet-corvette-c6-sound-effect-360531.mp3 (pixabay)
+assets/audio/engine_rev_1.ogg        <- mizanstock-lamborghini-urus-racing-sound-effect-163336.mp3 (pixabay)
+assets/audio/engine_rev_2.ogg        <- mizanstock-lamborghini-aventador-svj-racing-sound-effect-161994.mp3 (pixabay)
+assets/audio/engine_start_v8.ogg     <- karlosdearma-motor-v8-plymouth-barracuda-...-243224.mp3 (pixabay)
+assets/audio/horn_1.ogg              <- dragon-studio-car-honk-386166.mp3             (pixabay)
+assets/audio/horn_2.ogg              <- universfield-automobile-horn-02-352065.mp3    (pixabay)
+assets/audio/tire_screech.ogg        <- freesound_community-chrysler-lhs-tire-squeal-03-...-7154.mp3 (pixabay)
+assets/audio/tire_screech_2.ogg      <- freesound_community-chrysler-lhs-tire-squeal-02-...-14764.mp3 (pixabay)
+assets/audio/indicator_click.ogg     <- freesound_community-car-turn-signal-blinker-left-and-right-105622.mp3 (pixabay)
+assets/audio/ui_click.ogg            <- freesound_community-ui-click-43196.mp3        (pixabay)
