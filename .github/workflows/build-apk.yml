@@ -6,34 +6,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Step 1: the big game assets (textures, skies, models, audio) are too large for
-  # the normal GitHub upload, so they live in a Release called "assets-v1".
-  fetch-assets:
-    name: Download game assets
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download the asset pack from the assets-v1 release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          mkdir -p assets_pack
-          gh release download assets-v1 --repo "${{ github.repository }}" --pattern "*.zip" --dir assets_pack || {
-            echo "::error::Release 'assets-v1' with the asset zip was not found. Create it under Releases and attach the zip."
-            exit 1
-          }
-          ls -lh assets_pack
-
-      - name: Pass the pack to the build job
-        uses: actions/upload-artifact@v4
-        with:
-          name: game-assets-pack
-          path: assets_pack
-          retention-days: 1
-          compression-level: 0
-
   build-apk:
     name: Export debug APK
-    needs: fetch-assets
     runs-on: ubuntu-latest
     container:
       image: barichello/godot-ci:4.3
@@ -41,35 +15,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Get the asset pack
-        uses: actions/download-artifact@v4
-        with:
-          name: game-assets-pack
-          path: assets_pack
-
-      - name: Arrange assets into the project
-        run: |
-          for pack in assets_pack/*.zip; do
-            bash tools/setup_assets.sh "$pack" .
-          done
-          rm -rf assets_pack
-
-      # GitHub changes HOME inside containers; Godot's templates, Android SDK
-      # settings and debug keystore live under /root, so point HOME back there.
+      # Godot-er asset import
       - name: Import assets
         run: |
           export HOME=/root
           godot --headless --verbose --editor --quit
 
+      # APK Export
       - name: Export debug APK
         run: |
           export HOME=/root
           mkdir -p build/android
           godot --headless --verbose --export-debug "Android Debug" build/android/CityDrive-debug.apk
 
+      # Check APK exists
       - name: Verify APK exists
         run: test -s build/android/CityDrive-debug.apk
 
+      # Upload final APK artifact
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
