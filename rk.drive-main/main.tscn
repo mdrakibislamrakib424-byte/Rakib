@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="PackedScene" path="res://car.tscn" id="1_car"]
 [ext_resource type="Script" path="res://scripts/follow_camera.gd" id="2_cam"]
 [ext_resource type="Script" path="res://scripts/touch_controls.gd" id="3_touch"]
 [ext_resource type="Script" path="res://scripts/hud.gd" id="4_hud"]
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="5_pause"]
+[ext_resource type="Script" path="res://scripts/place_loader.gd" id="6_place"]
 
 [sub_resource type="Shader" id="Shader_grid"]
 code = "shader_type spatial;\n\nvarying vec3 world_pos;\n\nvoid vertex() {\n    world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;\n}\n\nvoid fragment() {\n    vec2 coord = world_pos.xz / 4.0;\n    vec2 grid = abs(fract(coord - 0.5) - 0.5) / fwidth(coord);\n    float line = 1.0 - min(min(grid.x, grid.y), 1.0);\n    ALBEDO = mix(vec3(0.18), vec3(0.6), line);\n    ROUGHNESS = 0.95;\n}\n"
@@ -48,6 +49,14 @@ shape = SubResource("BoxShape3D_ground")
 
 [node name="Mesh" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("PlaneMesh_ground")
+
+[node name="PlaceLoader" type="Node3D" parent="." node_paths=PackedStringArray("car", "sun", "world_environment", "fallback_ground")]
+script = ExtResource("6_place")
+place_id = "forest_night"
+car = NodePath("../Car")
+sun = NodePath("../Sun")
+world_environment = NodePath("../WorldEnvironment")
+fallback_ground = NodePath("../Ground")
 
 [node name="Car" parent="." instance=ExtResource("1_car")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

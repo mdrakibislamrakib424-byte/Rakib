@@ -70,3 +70,20 @@ script = ExtResource("4_audio")
 
 [node name="Lights" type="Node" parent="."]
 script = ExtResource("5_lights")
+
+[node name="Headlights" type="Node3D" parent="."]
+visible = false
+
+[node name="Left" type="SpotLight3D" parent="Headlights"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0.65, 0.65, 2.3)
+rotation_degrees = Vector3(-4, 180, 0)
+light_energy = 3.0
+spot_range = 45.0
+spot_angle = 38.0
+
+[node name="Right" type="SpotLight3D" parent="Headlights"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -0.65, 0.65, 2.3)
+rotation_degrees = Vector3(-4, 180, 0)
+light_energy = 3.0
+spot_range = 45.0
+spot_angle = 38.0

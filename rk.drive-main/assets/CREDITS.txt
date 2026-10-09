@@ -14,3 +14,11 @@ assets/audio/tire_screech.ogg        <- freesound_community-chrysler-lhs-tire-sq
 assets/audio/tire_screech_2.ogg      <- freesound_community-chrysler-lhs-tire-squeal-02-...-14764.mp3 (pixabay)
 assets/audio/indicator_click.ogg     <- freesound_community-car-turn-signal-blinker-left-and-right-105622.mp3 (pixabay)
 assets/audio/ui_click.ogg            <- freesound_community-ui-click-43196.mp3        (pixabay)
+
+----------------------------------------------------------------------------
+Places / 3D models
+----------------------------------------------------------------------------
+assets/places/forest_night/  <- "a forest (3) with a road at night for game" by dasy444
+    https://sketchfab.com/3d-models/a-forest-3-with-a-road-at-night-for-game-61f8c7817fe6457fb26e4814cfc48a3f
+    License: CC-BY 4.0 (https://creativecommons.org/licenses/by/4.0/)  -> CREDIT REQUIRED in the app / Play Store text.
+    Modified: scaled up, terrain smoothed, meshes merged, foliage converted to alpha-scissor (tools/bake_forest_night.gd).
